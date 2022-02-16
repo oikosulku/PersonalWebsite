@@ -1,0 +1,104 @@
+#admin-banner {
+    width: 100%;
+    min-height: 100px;
+    background-color: #bb3e03;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 0.5em 0.5em 0 #333;
+}
+
+section {
+    width: 100%;
+}
+
+#admin-nav {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #bb3e03;
+}
+#admin-nav ul, #admin-nav li {
+    display: inline;
+}
+/*
+    admin fprm
+*/
+
+.admin-form { 
+    width: 600px;
+    margin: 0 auto;
+}
+
+.form-control {
+    margin: 20px 0;
+}
+.form-control-checkbox {
+    margin: 30px 0 0;
+}
+
+.form-control label {
+    width: 100px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 5px;
+}
+
+.form-control input,
+.form-control textarea{
+    padding: 5px;
+}
+
+.checkbox {
+    margin-right: 10px;
+
+}
+
+label.textarea {
+    width: 100%;
+    margin: 10px 0 10px;
+    padding: 0;
+    text-align: left;
+}
+
+textarea {
+    width: 100%;
+}
+
+.form-control button {
+    float: right;
+    padding: 8px 15px;
+    background: #0a9396;
+    color: #fff;
+    border: 1px dotted #ccc;
+    border-radius: 3px;
+    transition: all 200ms ease-in-out;
+}
+
+.form-control button:hover, .project-card button.delete:hover, .project-card a.button:hover  {
+    background: #ee9b00;
+    cursor: pointer;
+    box-shadow: 0.5em 0.5em 0.5em -0.4em #333;
+    text-decoration: none;
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+.project-card a.button, .project-card button.delete {
+    float: left;
+    font-size: 0.7em;
+    margin: 0 5px;
+    padding: 1px 8px;
+    background: #0a9396;
+    color: #fff;
+    border: 1px dotted #ccc;
+    border-radius: 3px;
+    transition: all 200ms ease-in-out;
+}
+.project-card button.delete {
+    background: #ae2012;
+    float: left;
+    padding: 4px 8px;
+}
