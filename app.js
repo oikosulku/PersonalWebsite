@@ -11,13 +11,27 @@ const catchAsync = require('./utils/catchAsync');
 const appError = require('./utils/AppError');
 const projectRoutes = require('./routes/projects');
 
+
+
 //
 // set up session + flash
 const flash = require('connect-flash');
 const session = require('express-session');
 
-const sessionOptions = { secret: "changethis", resave: false, saveUninitialized: false};
-app.use(session(sessionOptions));
+// cookie expires after one week
+// max age is
+// hhtp only give exra layer security
+const sessionConfig = {
+    secret: 'thisshouldbebettersecret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 7,
+        maxAge:  1000 * 60 * 60 * 7,
+    }
+}
+app.use(session(sessionConfig));
 app.use(flash());
 
 
