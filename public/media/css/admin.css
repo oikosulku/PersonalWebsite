@@ -15,10 +15,11 @@ section {
 }
 
 #admin-nav {
-    margin-bottom: 20px;
+    margin: 20px 0;
     padding-bottom: 10px;
     border-bottom: 1px dotted #bb3e03;
 }
+
 #admin-nav ul, #admin-nav li {
     display: inline;
 }
