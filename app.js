@@ -1,38 +1,39 @@
-// require needed modules
+// 
+//require needed depencies
 const express = require('express');
-const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
-const {projectSchema} = require('./schemas.js');
+const flash = require('connect-flash');
+const session = require('express-session');
 const methodOverride = require('method-override');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+
+//
+// Require models
 const Project = require('./models/project');
+const User = require('./models/user');
+
+//
+// require utils + other code
 const catchAsync = require('./utils/catchAsync');
 const appError = require('./utils/AppError');
-const projectRoutes = require('./routes/projects');
 
+
+//
+// require routes
+const projectRoutes = require('./routes/projects');
+const userRoutes = require('./routes/users');
+
+
+/*
+* SET UP 
+*/
 
 
 //
 // set up session + flash
-const flash = require('connect-flash');
-const session = require('express-session');
-
-// cookie expires after one week
-// max age is
-// hhtp only give exra layer security
-const sessionConfig = {
-    secret: 'thisshouldbebettersecret',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        httpOnly: true,
-        expires: Date.now() + 1000 * 60 * 60 * 7,
-        maxAge:  1000 * 60 * 60 * 7,
-    }
-}
-app.use(session(sessionConfig));
-app.use(flash());
 
 
 //
@@ -52,6 +53,7 @@ mongoose.connect('mongodb://localhost:27017/oikkisdb')
 
 //
 // setup things...
+const app = express();
 app.engine('ejs' , ejsMate );
 app.set('view engine' , 'ejs');
 app.set('views', path.join(__dirname, '/views'));
@@ -61,21 +63,55 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 
-//
-// Define PROJECT ROUTES
-app.use('/admin/projects' , projectRoutes );
+// cookie expires after one week
+// max age is
+// hhtp only give exra layer security
+const sessionConfig = {
+    secret: 'thisshouldbebettersecret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 7,
+        maxAge:  1000 * 60 * 60 * 7,
+    }
+}
+app.use(session(sessionConfig));
+app.use(flash());
 
+
+//set up passport
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+/*
+* MIDDLEWARE
+*/
 
 //
 // middleware
 // - set flash message 
 // - set global variables
 app.use((req, res, next) => {
-    res.locals.messages = req.flash('success');
-    console.log( res.locals.messages );
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
     res.locals.pageTitle = "oikkis. web development";
+    res.locals.currentUser = req.user;
     next();
 })
+
+
+/*
+* ROUTES
+*/
+
+app.use('/admin/projects' , projectRoutes );
+app.use('/users' , userRoutes );
 
 
 //
@@ -110,7 +146,6 @@ app.get('/contact', (req, res) => {
 app.post('/contact', (req, res) => {
     const{ yourName, yourEmail, yourMsg } = req.body;
     // POST ACTION NEED TO BE DONE
-
     // set up flash message!
     req.flash('success', `Thank you ${yourName}, your message has sended! Will respond soonest!`);
     res.redirect('contact');
@@ -146,7 +181,10 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render( 'error', {err, pageTitle}  );
 })
 
-// fire up server...
+
+/*
+* SERVER
+*/
 app.listen(3000, () => {
     console.log("LISTENING ON PORT 3000");
 });

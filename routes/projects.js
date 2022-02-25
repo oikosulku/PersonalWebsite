@@ -21,7 +21,6 @@ const validateProject = (req, res, next) => {
 // middleware
 router.use((req, res, next) => {
     res.locals.projectTech = ['html', 'css', 'js', 'react', 'node', 'mongo', 'bootstrap'];
-    res.locals.messages = req.flash('success');
     next();
 })
 
