@@ -1,0 +1,46 @@
+<% layout('layouts/boilerplate')%>
+
+
+        <section>
+            
+            <h2>Edit Page</h2>
+            
+    
+                <div class="page-form">
+                    <form action="/pages/<%=page._id%>?_method=PUT" method="post">
+
+                        <div class="form-control">
+                            <label for="pageTitle">Page Title:</label>
+                            <input type"text" id="pageTitle" name="page[title]" value="<%=page.title%>">
+                        </div>
+
+                        <p>Please note, if you change page url, it may affect your search engine optimization.
+                        </p>
+                        <div class="form-control">
+                            <label for="pageUrl">Page Url:</label>
+                            <input type"text" id="pageUrl" name="page[url]" value="<%=page.url%>">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="template">template</label>
+                            <input type"text" id="template" name="page[template]" value="<%=page.template%>">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="order">order</label>
+                            <input type"text" id="order" name="page[order]" value="<%=page.order%>">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="content" class="textarea">Page content:</label>
+                            <textarea name="page[content]" id="content" cols="30" rows="20" required><%=page.content%></textarea>
+                        </div>
+                       
+                        <div class="form-control">
+                            <button>Update</button>
+                        </div>
+                    </form>
+                </div>
+         
+                <p></p>
+        </section>

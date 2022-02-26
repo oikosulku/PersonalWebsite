@@ -10,3 +10,10 @@ module.exports.projectSchema = Joi.object({
         projectTech: Joi.array().single(),
     }).required()
 })
+
+module.exports.pageSchema = Joi.object({
+        page: Joi.object({
+        title: Joi.string().required(),
+        content: Joi.string().empty('')
+    }).required()
+})

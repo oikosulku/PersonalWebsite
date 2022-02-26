@@ -12,8 +12,8 @@ const LocalStrategy = require('passport-local');
 
 //
 // Require models
-const Project = require('./models/project');
 const User = require('./models/user');
+const Page = require('./models/pages');
 
 //
 // require utils + other code
@@ -21,23 +21,18 @@ const catchAsync = require('./utils/catchAsync');
 const appError = require('./utils/AppError');
 
 
+
 //
 // require routes
+const pageRoutes = require('./routes/pages');
 const projectRoutes = require('./routes/projects');
 const userRoutes = require('./routes/users');
+const adminRoutes = require('./routes/admin');
 
 
 /*
-* SET UP 
+* SET UP DATABASE CONNECTION
 */
-
-
-//
-// set up session + flash
-
-
-//
-// connect to database
 mongoose.connect('mongodb://localhost:27017/oikkisdb')
 .then(()=> {
     console.log("MONGO CONNECTION OPEN");
@@ -47,12 +42,17 @@ mongoose.connect('mongodb://localhost:27017/oikkisdb')
     console.log(err)
 })
 
+/*
+* DEBUG
+*/
+
 // just for remember - this could be usefull for debug
 // https://github.com/expressjs/morgan
 // app.use(morgan('tiny));
 
-//
-// setup things...
+/*
+* SET UP 
+*/
 const app = express();
 app.engine('ejs' , ejsMate );
 app.set('view engine' , 'ejs');
@@ -63,24 +63,27 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 
-// cookie expires after one week
-// max age is
-// hhtp only give exra layer security
+
+/*
+/ set up session + flash
+*/
 const sessionConfig = {
     secret: 'thisshouldbebettersecret',
     resave: false,
     saveUninitialized: true,
     cookie: {
-        httpOnly: true,
-        expires: Date.now() + 1000 * 60 * 60 * 7,
-        maxAge:  1000 * 60 * 60 * 7,
+        httpOnly: true, // hhtp only give exra layer security
+        expires: Date.now() + 1000 * 60 * 60 * 7, // cookie expires after one week
+        maxAge:  1000 * 60 * 60 * 7, // max age is one week
     }
 }
 app.use(session(sessionConfig));
 app.use(flash());
 
 
-//set up passport
+/*
+/ set up passport
+*/
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -107,31 +110,25 @@ app.use((req, res, next) => {
 
 
 /*
+* GET MENU
+*/
+app.use(catchAsync(async (req, res, next) => {
+    res.locals.menu = await Page.find({isPublished: true} ).select('title url').sort('order');
+    next();
+}))
+
+
+/*
 * ROUTES
 */
 
-app.use('/admin/projects' , projectRoutes );
+app.use('/projects' , projectRoutes );
 app.use('/users' , userRoutes );
-
-
-//
-// check admin login here...
-app.use('/admin' , (req, res, next) => {
-    //console.log('ADMIN AREA!');
-    return next();
-})
-
-//
-// routes
-app.get('/', catchAsync(async (req, res) => {
-    // get all projects
-    const projects = await Project.find()
-    res.render('home', {projects});
-}))
+app.use('/admin' , adminRoutes );
+app.use('/' , pageRoutes );
 
 // content pages
 app.get('/page', (req, res) => {
-
     // ADD SOME FUNCTIONALITY HERE
     res.render('page');
 });
@@ -151,16 +148,6 @@ app.post('/contact', (req, res) => {
     res.redirect('contact');
 });
 
-
-//
-// ADMIN SECTION - PROJECTS
-// 
-
-app.get('/admin', (req, res) => {
-    pageTitle = 'oikkis. Admin - Dashboard';
-    isAdmin = true;
-    res.render('admin/index' , {pageTitle});
-});
 
 
 

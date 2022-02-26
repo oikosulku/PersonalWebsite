@@ -6,6 +6,7 @@ const appError = require('./utils/AppError');
 const {projectSchema} = require('./schemas.js');
 
 
+
 // Check if user logged in
 module.exports.isLoggedIn = (req, res, next) => {
     if(!req.isAuthenticated()) {

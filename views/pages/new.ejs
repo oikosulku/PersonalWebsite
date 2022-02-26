@@ -1,0 +1,38 @@
+<% layout('layouts/boilerplate')%>
+
+
+        <section>
+            
+            <h2>Add New page</h2>
+    
+                <div class="page-form">
+                    <form action="/" method="post">
+
+                        <div class="form-control">
+                            <label for="pageTitle">Page Title:</label>
+                            <input type"text" id="pageTitle" name="page[title]">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="template">template</label>
+                            <input type"text" id="template" name="page[template]" value="page">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="order">order</label>
+                            <input type"text" id="order" name="page[order]" value="">
+                        </div>
+
+                        <div class="form-control">
+                            <label for="content" class="textarea">Page content:</label>
+                            <textarea name="page[content]" id="content" cols="30" rows="20" required></textarea>
+                        </div>
+                       
+                        <div class="form-control">
+                            <button>Send</button>
+                        </div>
+                    </form>
+                </div>
+         
+                <p></p>
+        </section>

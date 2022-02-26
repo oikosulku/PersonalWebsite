@@ -1,0 +1,15 @@
+<% layout('layouts/boilerplate')%>
+    
+
+        <section>
+            <% if (page) { %>
+                <%- page.content -%>
+            <% } else { %>
+                <h3>Page not found!</h3>
+            <% } %>
+         
+        </section>
+
+        <section id="mywork">
+            <%- include('../partials/projects') %>
+        </section>

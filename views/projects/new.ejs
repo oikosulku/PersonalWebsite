@@ -1,0 +1,50 @@
+<% layout('layouts/boilerplate')%>
+
+
+        <section>
+            
+            <h2>Add New Project</h2>
+    
+                <div class="admin-form">
+                    <form action="/projects" method="post">
+
+                        <div class="form-control">
+                            <label for="projectName">Project Title:</label>
+                            <input type"text" id="projectName" name="project[title]" placeholder="Project title" value="" >
+                        </div>
+
+                        <div class="form-control">
+                            <label for="projectUrl">Project Url:</label>
+                            <input type"url" id="projectUrl" name="project[projectUrl]" placeholder="Url" value="" >
+                        </div>
+
+                        
+                        <div class="form-control">
+                            <label for="projectUrl">Github:</label>
+                            <input type"url" id="github" name="project[github]" placeholder="Url" value="" >
+                        </div>
+
+                        <div class="form-control-checkbox">
+                            <% for( tech of projectTech) { %>
+                         
+                                <label for="<%=tech%>" class="checkbox">
+                                <input type="checkbox" name="project[projectTech]" value="<%=tech%>" >
+                                <span><%=tech%></span>
+                                </label>
+                 
+                            <% } %>
+                        </div>
+
+                        <div class="form-control">
+                            <label for="projectDescription" class="textarea">Project description:</label>
+                            <textarea name="project[description]" id="projectDescription" cols="30" rows="10" required></textarea>
+                        </div>
+                       
+                        <div class="form-control">
+                            <button>Send</button>
+                        </div>
+                    </form>
+                </div>
+         
+                <p></p>
+        </section>

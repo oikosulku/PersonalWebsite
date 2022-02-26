@@ -1,30 +1,41 @@
-<section id="mywork">
-    <h2>Projects/Websites Made By Me</h2>
-    
-    <div class="panel">
-        <% for(let project of projects) { %>
+<% layout('layouts/boilerplate')%>
 
-        <div class="project-card">
-            <h3><%=project.title%></h3>
-            <div class="project-description"><%=project.description%></div>
-            <div class="project-url">
-                <% if( project.projectUrl ) { %>
-                   <a href="<%=project.projectUrl%>" target="_blank">Project Url</a>
-                <% } %>
-                <% if( project.projectUrl && project.github ) { %>
-                ::
-                <% } %>
-                <% if( project.github ) { %>
-                    <a href="<%=project.github%>" target="_blank">GitHub</a>
+
+        <section id="mywork">
+            <h2>Manage Projects</h2>
+            
+            <div class="panel">
+                <% for(let project of projects) { %>
+
+                <div class="project-card">
+                    <h3><%=project.title%></h3>
+                    <div class="project-description"><%=project.description%></div>
+                    <div class="project-url">
+                    <% if( project.projectUrl ) { %>
+                       <a href="<%=project.projectUrl%>" target="_blank">Project Url</a>
+                    <% } %>
+                    <% if( project.projectUrl && project.github ) { %>
+                    ::
+                    <% } %>
+                    <% if( project.github ) { %>
+                        <a href="<%=project.github%>" target="_blank">GitHub</a>
+                    <% } %>
+                    </div>
+                    <ul>
+                        <% for( tech of project.projectTech) { %>
+                            <li class="<%=tech%>"></li>
+                        <% } %>
+                    </ul>
+                    <div class="buttons">
+                        <a href="/projects/<%=project._id%>/edit" class="button">Edit</a>
+                        <form action="/projects/<%=project._id%>?_method=DELETE" method="POST">
+                            <button class="button delete">Delete</button>
+                        </form>
+                     </div>
+                    
+                </div>
                 <% } %>
             </div>
-            <ul>
-                <% for( tech of project.projectTech) { %>
-                    <li class="<%=tech%>"></li>
-                <% } %>
-            </ul>
-            
-        </div>
-        <% } %>
-    </div>
-</section>
+        </section>
+
+
