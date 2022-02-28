@@ -96,3 +96,11 @@ module.exports.deletePage = async (req, res) => {
     req.flash('success', `Page Deleted Succesfully!`);
     res.redirect(`/pages`);
 }
+
+module.exports.contactPostAction = (req, res) => {
+    const{ yourName, yourEmail, yourMsg } = req.body;
+    // POST ACTION NEED TO BE DONE
+    // set up flash message!
+    req.flash('success', `Thank you ${yourName}, your message has sended! Will respond soonest!`);
+    res.redirect('contact');
+}

@@ -127,33 +127,10 @@ app.use('/users' , userRoutes );
 app.use('/admin' , adminRoutes );
 app.use('/' , pageRoutes );
 
-// content pages
-app.get('/page', (req, res) => {
-    // ADD SOME FUNCTIONALITY HERE
-    res.render('page');
-});
 
-// contact page
-app.get('/contact', (req, res) => {
-    res.render('contact');
-});
-
-//
-// contact form POST
-app.post('/contact', (req, res) => {
-    const{ yourName, yourEmail, yourMsg } = req.body;
-    // POST ACTION NEED TO BE DONE
-    // set up flash message!
-    req.flash('success', `Thank you ${yourName}, your message has sended! Will respond soonest!`);
-    res.redirect('contact');
-});
-
-
-
-
-//
-// handling errors
-//
+/*
+* ERRORS
+*/
 
 // no route found - render 404
 app.all('*', (req, res, next) => {
