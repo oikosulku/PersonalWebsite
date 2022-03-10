@@ -9,6 +9,9 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require("helmet");
+
 
 //
 // Require models
@@ -63,16 +66,20 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 
+//sanitize post/get/ etc.
+app.use(mongoSanitize());
 
 /*
 / set up session + flash
 */
 const sessionConfig = {
+    name: 'session',
     secret: 'thisshouldbebettersecret',
     resave: false,
     saveUninitialized: true,
     cookie: {
         httpOnly: true, // hhtp only give exra layer security
+         // secure: true, // need https
         expires: Date.now() + 1000 * 60 * 60 * 7, // cookie expires after one week
         maxAge:  1000 * 60 * 60 * 7, // max age is one week
     }
@@ -91,9 +98,11 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// Give some xtra security for attacks etc..
+app.use(helmet());
 
 /*
-* MIDDLEWARE
+/ MIDDLEWARE
 */
 
 //
@@ -104,7 +113,8 @@ app.use((req, res, next) => {
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     res.locals.pageTitle = "oikkis. web development";
-    res.locals.currentUser = req.user;
+    res.locals.currentUser = 'mikko'; //req.user;
+    //console.log(req.user.role);
     next();
 })
 

@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const { roles } = require("../utils/roles");
 
 module.exports.renderRegisterForm = (req, res) => {
     res.render('users/register');
@@ -10,7 +11,9 @@ module.exports.register = async(req, res, next) => {
         const {email, username, password} = req.body;
         const user = new User({email, username});
         const registeredUser = await User.register(user, password);
-
+        
+        //User.role = roles.User;
+        //await User.save()
         // login new user - if error return err
         req.login(registeredUser, err => {
             if(err) return next(err);
@@ -39,4 +42,10 @@ module.exports.logout = (req, res) => {
     req.logout();
     req.flash('success' , 'You have logged out!');
     res.redirect('/');
+}
+
+module.exports.showAll = async(req, res, next) => {
+    pageTitle = 'oikkis. Manage users';
+    const users = await User.find();
+    res.render('users/all', { pageTitle, users });
 }

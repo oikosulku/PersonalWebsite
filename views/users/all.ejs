@@ -1,0 +1,30 @@
+<% layout('layouts/boilerplate')%>
+
+    <section>
+            
+        <h2>Manage Users</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>User Email</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% for(let user of users) { %>
+                <tr>
+                    <td><%=user.username%></td>
+                    <td><%=user.email%></td>
+                    <td><%=user.role%></td>
+                    <td><a href="">Edit</a> | 
+                        <% if(currentUser !== user.username) { %>
+                            <a href="">Delete</a>
+                        <% } %>
+                    </td>
+                </tr>
+             <% } %>
+            </tbody>
+       </table>
+    </section>
+    

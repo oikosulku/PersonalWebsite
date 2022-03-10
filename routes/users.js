@@ -18,4 +18,6 @@ router.post('/login',
 // LOGOUT
 router.get('/logout', users.logout);
 
+router.get('/' ,catchAsync(users.showAll));
+
 module.exports = router; 
