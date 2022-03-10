@@ -1,186 +1,224 @@
 #admin-banner {
-    width: 100%;
-    min-height: 100px;
-    background-color: #bb3e03;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 0.5em 0.5em 0 #333;
+  width: 100%;
+  min-height: 100px;
+  background-color: #bb3e03;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 0.5em 0.5em 0 #333;
 }
 
 section {
-    width: 100%;
+  width: 100%;
 }
 
 #admin-nav {
-    margin: 20px 0;
-    padding-bottom: 10px;
-    border-bottom: 1px dotted #bb3e03;
+  margin: 20px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px dotted #bb3e03;
 }
 
-#admin-nav ul, #admin-nav li {
-    display: inline;
+#admin-nav ul,
+#admin-nav li {
+  display: inline;
 }
 /*
     admin fprm
 */
 
-.admin-form { 
-    width: 340px;
-    margin: 0 auto;
+.admin-form {
+  width: 340px;
+  margin: 0 auto;
 }
 
-.page-form { 
-    width: 90%;
-    margin: 0 auto;
+.page-form {
+  width: 90%;
+  margin: 0 auto;
 }
 
 .form-control {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 .form-control-checkbox {
-    margin: 30px 0 0;
+  margin: 30px 0 0;
 }
 
 .form-control label {
-    width: 100px;
-    display: inline-block;
-    text-align: right;
-    padding-right: 5px;
+  width: 100px;
+  display: inline-block;
+  text-align: right;
+  padding-right: 5px;
 }
 
 .form-control input,
-.form-control textarea{
-    padding: 5px;
+.form-control textarea {
+  padding: 5px;
 }
 
 .checkbox {
-    margin-right: 10px;
-
+  margin-right: 10px;
 }
 
 label.textarea {
-    width: 100%;
-    margin: 10px 0 10px;
-    padding: 0;
-    text-align: left;
+  width: 100%;
+  margin: 10px 0 10px;
+  padding: 0;
+  text-align: left;
 }
 
 textarea {
-    width: 100%;
+  width: 100%;
+}
+/*
+  Buttons
+**/
+.button {
+  float: left;
+  padding: 5px;
+  margin: 0 5px;
+  background: #0a9396;
+  color: #fff;
+  border: 1px dotted #ccc;
+  border-radius: 3px;
+  font-size: smaller;
+}
+.button.delete {
+  background: #ae2012;
+  padding: 4px;
+}
+.button:hover,
+button.delete:hover {
+  background: #ee9b00;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .form-control button {
-    float: right;
-    padding: 8px 15px;
-    background: #0a9396;
-    color: #fff;
-    border: 1px dotted #ccc;
-    border-radius: 3px;
-    transition: all 200ms ease-in-out;
+  float: right;
+  padding: 8px 15px;
+  background: #0a9396;
+  color: #fff;
+  border: 1px dotted #ccc;
+  border-radius: 3px;
+  transition: all 200ms ease-in-out;
 }
 
-.form-control button:hover, .project-card button.delete:hover, .project-card a.button:hover  {
-    background: #ee9b00;
-    cursor: pointer;
-    box-shadow: 0.5em 0.5em 0.5em -0.4em #333;
-    text-decoration: none;
+.form-control button:hover,
+.project-card button.delete:hover,
+.project-card a.button:hover {
+  background: #ee9b00;
+  cursor: pointer;
+  box-shadow: 0.5em 0.5em 0.5em -0.4em #333;
+  text-decoration: none;
 }
 .form-control .buttons {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
-.project-card a.button, 
+.project-card a.button,
 .project-card button.delete,
 .page-card a.button,
 .page-card button.delete {
-    float: left;
-    font-size: 0.7em;
-    margin: 0 5px;
-    padding: 1px 8px;
-    background: #0a9396;
-    color: #fff;
-    border: 1px dotted #ccc;
-    border-radius: 3px;
-    transition: all 200ms ease-in-out;
+  float: left;
+  font-size: 0.7em;
+  margin: 0 5px;
+  padding: 1px 8px;
+  background: #0a9396;
+  color: #fff;
+  border: 1px dotted #ccc;
+  border-radius: 3px;
+  transition: all 200ms ease-in-out;
 }
 .project-card button.delete,
-.page-card button.delete{
-    background: #ae2012;
-    float: left;
-    padding: 4px 8px;
+.page-card button.delete {
+  background: #ae2012;
+  float: left;
+  padding: 4px 8px;
 }
 
 .page-panel {
-
-    width: 100%;
-    max-width: 960px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    text-align: center;
-    flex-wrap: wrap;
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  text-align: center;
+  flex-wrap: wrap;
 }
 
 .page-panel h3 {
-    font-weight: 700;
-    font-size: 1em;
-    width: 100%;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    border-bottom: 1px dashed #ccc;
-    text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1em;
+  width: 100%;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px dashed #ccc;
+  text-transform: uppercase;
 }
 .page-panel div {
-    font-size: 0.9em;
-    margin: 10px 0;
-    line-height: 1.2em;
+  font-size: 0.9em;
+  margin: 10px 0;
+  line-height: 1.2em;
 }
 
 .page-card {
-    border: 1px dotted #ccc;
-    box-shadow: 0.5em 0.5em 0.5em -0.4em #666; 
-    border-radius: 10px;
-    width: 90%;
-    padding: 10px;
-    text-align: left;
-    transition: all 500ms ease-in-out;
+  border: 1px dotted #ccc;
+  box-shadow: 0.5em 0.5em 0.5em -0.4em #666;
+  border-radius: 10px;
+  width: 90%;
+  padding: 10px;
+  text-align: left;
+  transition: all 500ms ease-in-out;
 }
 
 .page-card:hover {
-    border: 1px solid #666;
-    box-shadow: 0.5em 0.5em 0.5em -0.4em #333;
+  border: 1px solid #666;
+  box-shadow: 0.5em 0.5em 0.5em -0.4em #333;
 }
 .page-card .page-description {
-    float: left;
-    width: 450px;
-    padding: 0;
+  float: left;
+  width: 450px;
+  padding: 0;
 }
 .page-card h3 span {
-    text-transform: lowercase;
-    color: #666;
+  text-transform: lowercase;
+  color: #666;
 }
 
 .page-card h3 {
-    padding: 5px 0;
-    margin-bottom: 0;
+  padding: 5px 0;
+  margin-bottom: 0;
 }
 .page-card .buttons {
-    float: right;
-    display: flex;
-    justify-content: center;
+  float: right;
+  display: flex;
+  justify-content: center;
 }
 
 .page-card a.btn-alert {
-    background-color: #ee9b00;
+  background-color: #ee9b00;
 }
 .page-card a.btn-all-good {
-    background-color: forestgreen;
+  background-color: forestgreen;
 }
 p.info {
-    display: block;
-    width: 100%;
-    text-align: center;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+}
+
+table thead {
+  font-weight: bold;
+  text-align: left;
+}
+
+table td,
+table th {
+  padding: 10px;
 }

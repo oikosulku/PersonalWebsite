@@ -1,5 +1,6 @@
 <% layout('layouts/boilerplate')%>
 
+
     <section>
             
         <h2>Manage Users</h2>
@@ -9,6 +10,8 @@
                     <th>User Name</th>
                     <th>User Email</th>
                     <th>Role</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -17,11 +20,20 @@
                     <td><%=user.username%></td>
                     <td><%=user.email%></td>
                     <td><%=user.role%></td>
-                    <td><a href="">Edit</a> | 
-                        <% if(currentUser !== user.username) { %>
-                            <a href="">Delete</a>
-                        <% } %>
-                    </td>
+                    <% if(currentUser.role === 'Admin') { %>
+                    
+                        <td>
+                            
+                            <a href="users/<%=user._id%>/edit" class="button">Edit</a>
+                        
+                            <% if(currentUser.username !== user.username) { %>
+                                <form action="/users/<%=user._id%>?_method=DELETE" method="POST">
+                                    <button class="button delete">Delete</button>
+                                </form>
+                               
+                            <% } %>
+                        </td>
+                    <% } %>
                 </tr>
              <% } %>
             </tbody>

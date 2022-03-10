@@ -113,8 +113,8 @@ app.use((req, res, next) => {
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     res.locals.pageTitle = "oikkis. web development";
-    res.locals.currentUser = 'mikko'; //req.user;
-    //console.log(req.user.role);
+    res.locals.currentUser = req.user;
+    //console.log(currentUser);
     next();
 })
 

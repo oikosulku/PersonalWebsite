@@ -26,7 +26,7 @@ const sample = array => array[Math.floor(Math.random() * array.length)];
 
 const addAdmin = async () => {
     // CHANGE THIS USER ID 
-    const id = "<YOUR USER ID>";
+    const id = "62299d8308cd2e067c4dcf75";
     await User.findByIdAndUpdate(id, {role: "Admin"});
      //await User.save();
 }

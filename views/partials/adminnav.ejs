@@ -7,7 +7,9 @@
         <li><a href="/projects/new">Add New Project</a></li> |
         <li><a href="/pages">Manage Pages</a></li> |
         <li><a href="/new">New Page</a></li> |
-        <li><a href="/users">Show Users</a></li> |
+        <% if(currentUser.role === 'Admin') { %>
+            <li><a href="/users">Show Users</a></li> |
+        <% } %>
         <li><a href="/users/logout">Logout</a></li>
     </ul>
 </div>
