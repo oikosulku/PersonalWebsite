@@ -21,8 +21,8 @@ const Page = require('./models/pages');
 //
 // require utils + other code
 const catchAsync = require('./utils/catchAsync');
-const appError = require('./utils/AppError');
-
+const appError = require('./utils/AppError'); // same as express error
+ 
 
 
 //
@@ -56,7 +56,7 @@ mongoose.connect('mongodb://localhost:27017/oikkisdb')
 /*
 * SET UP 
 */
-const app = express();
+const app = express());
 app.engine('ejs' , ejsMate );
 app.set('view engine' , 'ejs');
 app.set('views', path.join(__dirname, '/views'));
